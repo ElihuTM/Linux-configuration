@@ -1,8 +1,7 @@
 #!/bin/bash
 
 file='not file'
-file_type='not type'
-p="p"		
+input=$@
 
 getFileType() {
 	echo $file | cut -d '.' -f 2
@@ -11,75 +10,53 @@ getFileType() {
 getFileName() {
 	echo $file | cut -d '.' -f 1
 }
+ 
+getValidFiles() {
+	ls -t | awk '$1 ~/.\.cpp/ || $1 ~/.\.py/ || $1 ~/.\.java/ || $1 ~/.\.rb/'
+}
 
-isValidFile() {	
-	if [ $file ]; then
-		if [ "$file_type" = "cpp" ] ||
-			 [ "$file_type" = "py" ] ||
-			 [ "$file_type" = "java" ] ||
-			 [ "$file_type" = "rb" ];
-		then
-			echo "valid"
-		else
-			echo "no valid"
-		fi
-	else
-		echo "valid"
-	fi
+getSpecificFile() {
+	echo $input | awk '{for(i=1; i<=NF; ++i) if($i == "--file" || $i == "-f") print $(i+1)}'
 }
 
 getFile() {
-	extract_specific_file=$(echo $@ | grep -o ent)
-	echo "--$extract_specific_file--"
-	
-	current_position=1
-	file=$(ls -t | sed -n 1p)
-	file_type=$(getFileType)
-	query=$(isValidFile)	
-
-	while [ "$query" != "valid" ]
-	do
-		current_position=$((current_position+1))
-		file=$(ls -t | sed -n $current_position$p)		
-		file_type=$(getFileType)
-		query=$(isValidFile)
-	done
-	
-	if [ $file ]; then
-		return 0
+	specific_file=$(getSpecificFile)
+	if [[ -f $specific_file ]]; then
+		file=$specific_file
 	else
-		return 3312
+		file=$(echo $(getValidFiles) | cut -d ' ' -f 1)
 	fi
 }
 
 compilar() {
+	file_type=$(getFileType)	
 	case $file_type in
 		cpp)
-			g++ -std=c++11 -o ej $file && return 0
+			g++ -std=c++11 -o ej $file
 			;;
 		java)
-			javac $file && return 0
+			javac $file
 			;;
 		*)
 			return 0
 			;;
 	esac
-	return 3312
 }
 
 ejecutar() {
+	file_type=$(getFileType)
 	case $file_type in
 		cpp)
-			./ej && return 0
+			./ej
 			;;
 		java)
-			java $(getFileName) && return 0
+			java $(getFileName)
 			;;
 		py)
-			python3 $file && return 0
+			python3 $file
 			;;
 		rb)
-			ruby $file && return 0
+			ruby $file
 			;;
 		*)
 			return 3312
@@ -87,5 +64,5 @@ ejecutar() {
 	esac
 }
 
-echo "--$@--"
-getFile && compilar && echo "ejecutando..." && ejecutar
+getFile && compilar && echo "ejecutando $file..." && ejecutar
+
