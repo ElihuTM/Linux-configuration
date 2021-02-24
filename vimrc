@@ -21,15 +21,6 @@ set tabstop=4
 set splitright
 colorscheme pablo
 
-" desactiva las flecha
-nnoremap <right> <nop>
-nnoremap <up> <nop>
-nnoremap <left> <nop>
-nnoremap <down> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 
 call plug#begin('~/.vim/plugged')
 
@@ -65,9 +56,29 @@ let g:lightline = {
 let mapleader=" "
 nmap <Leader>f <Plug>(easymotion-s2)
 nmap <Leader>nt :NERDTreeFind<CR>
+nmap <Leader>t :NERDTreeToggle<CR>
 nmap <Leader>w :w<CR>
 nmap <Leader>q :q<CR>
-nmap <Leader>o :GFiles<CR> 
+nmap <Leader>o :Files<CR> 
 
-nmap <S-t> :vsplit<CR>
-nmap <S-v> :vsplit ~/.vimrc<CR>
+nmap <s-t> :vsplit<CR>
+nmap <s-v> :vsplit ~/.vimrc<CR>
+inoremap jk <esc>
+
+"control j-k para mover lineas y selecciones completas
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
+" k desactiva las flecha
+nnoremap <right> <nop>
+nnoremap <up> <nop>
+nnoremap <left> <nop>
+nnoremap <down> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
