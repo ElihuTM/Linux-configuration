@@ -1,6 +1,7 @@
 syntax on
 set autoindent
-set clipboard=unnamed
+set clipboard=unnamedplus
+set cursorline
 set encoding=utf-8
 set hlsearch
 set ignorecase
@@ -45,6 +46,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'Chiel92/vim-autoformat'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'skammer/vim-css-color'
+Plug 'shmargum/vim-sass-colors'
+Plug 'christianfosli/wsl-copy'
+Plug 'luochen1990/rainbow'
 
 call plug#end()
 
@@ -58,7 +64,13 @@ let g:jsx_ext_required = 0
 
 " colorscheme onedark
 
-" nerd-tree
+" css color
+let g:cssColorVimDoNotMessMyUpdatetime = 1
+
+" rainbow
+let g:rainbow_active = 1
+
+"nerd-tree
 " let NERDTreeQuitOnOpen=1
 let NERDTreeAutoDeleteBuffer=1
 let NERDTreeDirArrows=1
@@ -81,6 +93,12 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" close tag
+let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
+
+" autoformat
+au BufWrite *.scss,*.jsx,*.cpp,*.js :Autoformat
+
 " maps
 let mapleader=" "
 nmap <Leader>s <Plug>(easymotion-s2)
@@ -94,6 +112,10 @@ map <Leader>ob :Buffers<CR>
 nmap <s-n> :vnew<CR>
 nmap <s-v> :vsplit ~/.vimrc<CR>
 inoremap jk <esc>
+
+"cpy to windows clipboard
+nmap <silent> <leader>c <Plug>WslCopy
+xmap <silent> <leader>c <Plug>WslCopy
 
 "control j-k para mover lineas y selecciones completas
 nnoremap <C-j> :m .+1<CR>==
