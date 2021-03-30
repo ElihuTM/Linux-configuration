@@ -54,6 +54,7 @@ Plug 'luochen1990/rainbow'
 
 call plug#end()
 
+
 colorscheme gruvbox 
 let g:gruvbox_contrast_dark = "hard"
 let g:deoplete#enable_at_startup = 1
@@ -97,10 +98,14 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:closetag_filenames = '*.html,*.js,*.jsx,*.ts,*.tsx'
 
 " autoformat
-au BufWrite *.scss,*.jsx,*.cpp,*.js :Autoformat
+au BufWrite *.scss,*.jsx,*.js :Autoformat
 
 " maps
 let mapleader=" "
+
+"run current file
+nnoremap <Leader>x :!compiler -f %<cr>
+
 nmap <Leader>s <Plug>(easymotion-s2)
 map <Leader>nt :NERDTreeFind<CR>
 map <Leader>t :NERDTreeToggle<CR>

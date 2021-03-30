@@ -12,7 +12,7 @@ getFileName() {
 }
  
 getValidFiles() {
-	ls -t | awk '$1 ~/.\.cpp/ || $1 ~/.\.py/ || $1 ~/.\.java/ || $1 ~/.\.rb/'
+	ls -t | awk '$1 ~/.\.cpp/ || $1 ~/.\.py/ || $1 ~/.\.java/ || $1 ~/.\.rb/ || $1 ~/.\.js/'
 }
 
 getSpecificFile() {
@@ -57,6 +57,9 @@ ejecutar() {
 			;;
 		rb)
 			ruby $file
+			;;
+		js)
+			node $file
 			;;
 		*)
 			return 3312
