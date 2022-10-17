@@ -1,5 +1,12 @@
 # LINUX AUTOMATION CONFIGURATION
 
+## steps to configure your linux
+
+1. Adding symlinks
+
+ln -s ~/linux-configuration/zshenv ~/.zshenv
+ln -s ~/linux-configuration/vimrc ~/.config/nvim/init.vim
+
 this file gives you some relevant configurations when you are starting on Linux Ubuntu
 
 * Auto compiler
