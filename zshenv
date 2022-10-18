@@ -1,11 +1,11 @@
-# Example aliases
 alias vim=openVim
 alias v=openVim
+
 alias zshconfig="nvim ~/.zshrc"
+alias zshenv="nvim ~/.zshenv"
+alias vimconfig="nvim ~/.vimrc"
 
 alias compiler="bash ~/linux-configuration/auto_compiler.sh"
-alias vimconfig="nvim ~/.vimrc"
-alias prueba='echo "this is a functional prueba"'
 
 function openVim {
 	if [ $# -eq 0  ]; then
