@@ -64,8 +64,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'Chiel92/vim-autoformat'
+
+" css/sass colors
 Plug 'skammer/vim-css-color'
 Plug 'shmargum/vim-sass-colors'
+" NOTE: vim-sass-colors requires ruby.
+
 Plug 'christianfosli/wsl-copy'
 Plug 'luochen1990/rainbow'
 Plug 'djoshea/vim-autoread'
@@ -132,8 +136,8 @@ let g:lightline = {
 	\ }
 
 " ultisnips
-let g:UltiSnipsExpandTrigger="<C-space>"
-let g:UltiSnipsJumpForwardTrigger="<C-space>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " close tag
@@ -229,6 +233,24 @@ inoremap <silent><expr> <TAB>
 inoremap <silent><expr> <cr> coc#pum#visible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-k>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-j>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-k> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
 
 "open terminal
 function! OpenTerminal()
