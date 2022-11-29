@@ -12,7 +12,7 @@ getFileName() {
 }
  
 getValidFiles() {
-	ls -t | awk '$1 ~/.\.cpp/ || $1 ~/.\.py/ || $1 ~/.\.java/ || $1 ~/.\.rb/ || $1 ~/.\.js/'
+	ls -t | awk '$1 ~/.\.cpp/ || $1 ~/.\.rs/ || $1 ~/.\.py/ || $1 ~/.\.java/ || $1 ~/.\.rb/ || $1 ~/.\.js/'
 }
 
 getSpecificFile() {
@@ -37,6 +37,9 @@ compilar() {
 		java)
 			javac $file
 			;;
+		rs)
+			rustc -o ej $file
+			;;
 		*)
 			return 0
 			;;
@@ -47,6 +50,9 @@ ejecutar() {
 	file_type=$(getFileType)
 	case $file_type in
 		cpp)
+			./ej
+			;;
+		rs)
 			./ej
 			;;
 		java)

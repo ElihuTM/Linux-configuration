@@ -65,6 +65,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'Chiel92/vim-autoformat'
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 " css/sass colors
 Plug 'skammer/vim-css-color'
 Plug 'shmargum/vim-sass-colors'

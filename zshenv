@@ -14,3 +14,4 @@ function openVim {
 		nvim $1
 	fi
 }
+. "$HOME/.cargo/env"
